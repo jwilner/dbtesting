@@ -1,0 +1,13 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+  tester:
+    image: golang:1.11.5
+    volumes:
+      - .:/src
+    depends_on:
+      - postgres
+    working_dir: /src
+    environment:
+      - DBTESTING_DSN=postgres:user=postgres host=postgres sslmode=disable
